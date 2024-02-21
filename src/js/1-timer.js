@@ -1,4 +1,3 @@
-
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
@@ -6,6 +5,9 @@ import 'izitoast/dist/css/iziToast.min.css';
 import iziToast from 'izitoast/dist/js/iziToast.min.js';
 
 let userSelectedDate;
+let countdownInterval;
+// const dateInput = document.getElementById('#datetime-picker');
+
 const startButton = document.querySelector('[data-start]');
 startButton.disabled = true;
 
@@ -28,6 +30,8 @@ flatpickr("#datetime-picker", {
     },
   });
 
+
+
 startButton.addEventListener("click", () => {
   startButton.disabled = true;
 
@@ -37,6 +41,7 @@ startButton.addEventListener("click", () => {
     minutes: document.querySelector("[data-minutes]"),
     seconds: document.querySelector("[data-seconds]"),
   };
+
 
   const updateTimer = () => {
     const difference = userSelectedDate - new Date();
@@ -59,6 +64,8 @@ startButton.addEventListener("click", () => {
 
   updateTimer();
   countdownInterval = setInterval(updateTimer, 1000);
+
+  document.getElementById('datetime-picker').disabled = true;
 });
 
 function addLeadingZero(value) {
